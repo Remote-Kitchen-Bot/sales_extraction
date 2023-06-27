@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Country and Location Dropdown</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: #f4f4f4;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Select Country and Location</h2>
+        <label for="country">Country:</label>
+        <select id="country">
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+        </select>
+        <label for="location">Location:</label>
+        <select id="location">
+        </select>
+        <button id="okButton">OK</button>
+    </div>
+
+    <script>
+        // define location options for each country
+        var locationsByCountry = {
+            usa: ['New York', 'Los Angeles', 'Chicago'],
+            uk: ['London', 'Birmingham', 'Leeds']
+        };
+
+        // get the country and location dropdowns
+        var countryDropdown = document.getElementById('country');
+        var locationDropdown = document.getElementById('location');
+        var okButton = document.getElementById('okButton');
+
+        // function to update the location dropdown
+        function updateLocationDropdown() {
+            var selectedCountry = countryDropdown.value;
+            var locations = locationsByCountry[selectedCountry];
+
+            // clear the location dropdown
+            locationDropdown.innerHTML = '';
+
+            // add new options to the location dropdown
+            for (var i = 0; i < locations.length; i++) {
+                var option = document.createElement('option');
+                option.value = locations[i];
+                option.text = locations[i];
+                locationDropdown.add(option);
+            }
+        }
+
+        // listen for changes on the country dropdown
+        countryDropdown.addEventListener('change', updateLocationDropdown);
+
+        // Listen for click on the OK button
+        okButton.addEventListener('click', function () {
+            alert('Country: ' + countryDropdown.value + ', Location: ' + locationDropdown.value);
+        });
+
+        // initial population of location dropdown
+        updateLocationDropdown();
+    </script>
+</body>
+
+</html>
